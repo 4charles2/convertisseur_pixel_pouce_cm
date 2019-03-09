@@ -2,10 +2,11 @@
 
 /*
 Plugin Name: Convertisseur Pixel Pouce Cm
-Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
-Description: A brief description of the Plugin.
+Plugin URI: http://
+Description: convertisseur pixels<=>pouces<=>cm
 Version: 1.0
 Author: 4charles2
-Author URI: http://URI_Of_The_Plugin_Author
+Author URI: https://charles-tognol.fr
 License: A "Slug" license name e.g. GPL2
 */
+
