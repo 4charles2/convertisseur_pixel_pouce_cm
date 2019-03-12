@@ -1,14 +1,28 @@
 .myForm{
-    width: 100%;
+    width: 49%;
     height : 100%;
-}
-.myForm input[type="submit"]{
-    margin: 20px !important;
+    max-width: 340px;
+    background-color: rgba(255,255,255,0.5);
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
 }
 .input{
     display : block;
     border-radius: 5px;
+    height: 50px;
+    padding: 10px;
 }
 .input-group :nth-child(2){
     margin: 10px 10px 10px 5%;
+}
+.myForm input[type="submit"]{
+    margin: 20px !important;
+    float : right;
+}
+.myForm:after{
+    content: "";
+    clear: both;
+    display: block;
 }
