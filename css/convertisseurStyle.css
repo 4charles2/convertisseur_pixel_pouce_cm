@@ -1,0 +1,14 @@
+.myForm{
+    width: 100%;
+    height : 100%;
+}
+.myForm input[type="submit"]{
+    margin: 20px !important;
+}
+.input{
+    display : block;
+    border-radius: 5px;
+}
+.input-group :nth-child(2){
+    margin: 10px 10px 10px 5%;
+}

@@ -14,6 +14,7 @@ class Screen extends ConvertPoucesPixelsCm{
 
 	private $width;
 	private $lenght;
+	private $aire;
 	private $unite;
 	private $dpi;
 	private $hypotenuse;
@@ -21,22 +22,48 @@ class Screen extends ConvertPoucesPixelsCm{
 	function hydrate(array $datas){
 		foreach ($datas as $key => $value){
 			$methode = 'set'.ucfirst($key);
-			if(method_exists(this, $methode)){
+			if(method_exists($this, $methode)){
 				$this->$methode($value);
 			}
 		}
-	}
-	public function calcul(){
-		if(!empty($this->unite))
-			switch($){
 
-			}
+	}
+	public function aire(){
+		$this->lenght['cm'] = $this->toCM($this->lenght);
+		$this->width['cm'] = $this->toCM($this->width);
+
+		$this->lenght['pouces'] = self::CM_TO_POUCES($this->lenght['cm']);
+		$this->width['pouces'] = self::CM_TO_POUCES($this->width['cm']);
+
+		$this->width['pixels'] = self::CM_TO_PIXELS($this->width['cm'], $this->dpi);
+		$this->lenght['pixels'] = self::CM_TO_PIXELS($this->lenght['cm'], $this->dpi);
+
+		$this->hypotenuse["cm"] = hypot($this->lenght['cm'], $this->width['cm']);
+		$this->hypotenuse['pouces'] = self::CM_TO_POUCES($this->hypotenuse['cm']);
+		$this->hypotenuse['pixels'] = self::CM_TO_PIXELS($this->hypotenuse['cm'], $this->dpi);
+
+		$this->aire['cm'] = $this->width['cm'] * $this->lenght['cm'];
+		$this->aire['pouces'] = $this->width['pouces'] * $this->lenght['pouces'];
+		$this->aire['pixels'] = $this->width['pixels'] * $this->width['pixels'];
+
+	}
+	public function hypotenuse(){
+		$this->hypotenuse['cm'] = $this->toCM($this->hypotenuse);
+		$this->hypotenuse['pouces'] = self::CM_TO_POUCES($this->hypotenuse['cm']);
+		$this->hypotenuse['pixels'] = self::CM_TO_PIXELS($this->hypotenuse['cm'], $this->dpi);
+	}
+	public function toCM($size){
+		$methode = strtoupper($this->unite)."_TO_CM";
+		if($this->unite !== "cm" && method_exists($this, $methode))
+			return $methode($size, $this->dpi);
+		else
+			return $size;
 	}
 	/**
 	 * @return mixed
 	 */
 	public function getWith() {
-		return $this->with;
+		return $this->width;
 	}
 
 	/**

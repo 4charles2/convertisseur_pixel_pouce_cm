@@ -1,22 +1,22 @@
-<form id="" method="" action="">
-    <div>
+<form class="myForm" id="aireForm" method="post" action="">
+    <div class="input-group">
         <label for="lenght">La longueur de l'écran :</label>
-        <input type="number" name="lenght" id="lenght" placeholder="longueur">
+        <input class="input" type="number" name="lenght" id="lenght" placeholder="longueur" required>
     </div>
-    <div>
+    <div class="input-group">
         <label for="width">largeur</label>
-        <input type="number" name="width" id="width" placeholder="largeur">
+        <input class="input" type="number" name="width" id="width" placeholder="largeur" required>
     </div>
-    <div>
+    <div class="input-group">
         <label for="dpi">Dpi de l'écran</label>
-        <input type="number" name="dpi" id="dpi" placeholder="dpi">
+        <input class="input" type="number" name="dpi" id="dpi" placeholder="dpi" required>
     </div>
-    <div>
+    <div class="input-group">
         <label for="unite">Les unites de mesure (cm, pouces, pixels)</label>
-        <select name="unite" id="unite">
-            <option value="cm">cm</option>
-            <option value="pixels">pixels</option>
-            <option value="pouces">pouces</option>
+        <select class="input" name="unite" id="unite" required>
+            <option value="CM">cm</option>
+            <option value="PIXELS" selected>pixels</option>
+            <option value="POUCES">pouces</option>
         </select>
     </div>
 

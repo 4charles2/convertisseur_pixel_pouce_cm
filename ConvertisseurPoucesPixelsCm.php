@@ -15,22 +15,72 @@ class ConvertPoucesPixelsCm {
 
 	static $CM_POUCES = 2.54;
 
-	static function PIXELS_TO_CM($pixel){
-
+	/**
+	 * Convertie les pixels en cm
+	 *
+	 * @param $pixel
+	 * @param $dpi
+	 *
+	 * @return float|int
+	 */
+	static function PIXELS_TO_CM($pixel, $dpi):float {
+		return $pixel * self::$CM_POUCES/$dpi;
 	}
-	static function PIXELS_TO_POUCES($pixels){
 
+	/**
+	 * convertie les pixels en pouces
+	 *
+	 * @param $pixels
+	 *
+	 * @return float|int
+	 */
+	static function PIXELS_TO_POUCES($pixels, $dpi){
+		return $pixels/$dpi;
 	}
-	static function CM_TO_PIXELS($cm){
 
+	/**
+	 * convertie les cm en pixels
+	 *
+	 * @param $cm
+	 * @param $dpi
+	 *
+	 * @return float
+	 */
+	static function CM_TO_PIXELS($cm, $dpi):float{
+		return $cm * $dpi / self::$CM_POUCES;
 	}
+
+	/**
+	 * Convertie les cm en pouces
+	 *
+	 * @param $cm
+	 *
+	 * @return float|int
+	 */
 	static function CM_TO_POUCES($cm){
-
+		return $cm / self::$CM_POUCES;
 	}
-	static function POUCES_TO_CM($pouces){
 
+	/**
+	 * Convertie les pouces en cm
+	 *
+	 * @param $pouces
+	 *
+	 * @return float
+	 */
+	static function POUCES_TO_CM($pouces):float{
+		return $pouces * self::$CM_POUCES;
 	}
-	static function POUCES_TO_PIXEL(){
 
+	/**
+	 * Convertie les pouces en pixels
+	 *
+	 * @param $pouces
+	 * @param $dpi
+	 *
+	 * @return float
+	 */
+	static function POUCES_TO_PIXELS($pouces, $dpi):float{
+		return $pouces * $dpi;
 	}
 }
