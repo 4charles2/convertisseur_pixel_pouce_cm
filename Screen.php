@@ -19,14 +19,27 @@ class Screen extends ConvertPoucesPixelsCm{
 	private $dpi;
 	private $hypotenuse;
 
-	function hydrate(array $datas){
+	/**
+	 *
+	 * hydrate l'objet avec les valeurs passé en paramètre dans un tableau
+	 * If aucune erreur return true sinon false
+	 *
+	 * @param array $datas
+	 *
+	 * @return bool
+	 */
+	function hydrate(array $datas): bool{
 		foreach ($datas as $key => $value){
-			$methode = 'set'.ucfirst($key);
-			if(method_exists($this, $methode)){
-				$this->$methode($value);
+			if($key !== 'unite' && is_numeric($value) && $value > 0) {
+				$methode = 'set' . ucfirst( $key );
+				if ( method_exists( $this, $methode ) ) {
+					$this->$methode( $value );
+				}
+			}else{
+				return false;
 			}
 		}
-
+		return true;
 	}
 	public function aire(){
 		$this->lenght['cm'] = $this->toCM($this->lenght);

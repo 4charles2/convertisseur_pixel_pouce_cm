@@ -1,5 +1,6 @@
 <h3>Convertie la taille de l'écran en diffèrentes unité :</h3>
-<form class="myForm" id="hypotenuseForm" method="" action="">
+<form class="myForm" id="hypotenuseForm" method="post" action="#">
+	<?php //wp_nonce_field(-1, "hypotenuseForm-verif", false, false); ?>
     <div class="input-group">
         <label for="hypotenuse">Taille de l'écran en diagonale</label>
         <input class="input" type="number" name="hypotenuse" id="hypotenuse" placeholder="taille de l'écran" required>
@@ -17,5 +18,14 @@
         </select>
     </div>
 
-    <input type="submit" value="Valider">
+    <input type="submit" value="Valider" name="hypotenuseForm">
 </form>
+
+
+    <?php
+        if (isset($_GET['erreur'])){
+          echo  '<div class="view alert">
+                      <p>Vous devez rentrer une valeur numérique et supérieure à zéro</p>
+                </div>';
+        }
+    ?>
