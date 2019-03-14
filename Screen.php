@@ -5,7 +5,7 @@
  * Date: 2019-03-09
  * Time: 16:04
  */
-
+require 'ConvertisseurPoucesPixelsCm.php';
 /**
  * Class Screen
  * Caracteristique d'un écran longeur largeur dpi hypotenuse
@@ -28,14 +28,16 @@ class Screen extends ConvertPoucesPixelsCm{
 	 *
 	 * @return bool
 	 */
-	function hydrate(array $datas): bool{
+	function hydrate(array $datas){
 		foreach ($datas as $key => $value){
 			if($key !== 'unite' && is_numeric($value) && $value > 0) {
 				$methode = 'set' . ucfirst( $key );
 				if ( method_exists( $this, $methode ) ) {
 					$this->$methode( $value );
 				}
-			}else{
+			}elseif($key === 'unite' && ($value === 'PIXELS' || $value === 'CM' || $value === 'POUCES')){
+				$this->setUnite($value);
+			}elseif($key !== 'aireForm-verif' && $key !== '_wp_http_referer' && $key !== 'aireForm'){
 				return false;
 			}
 		}
@@ -80,9 +82,9 @@ class Screen extends ConvertPoucesPixelsCm{
 	}
 
 	/**
-	 * @param mixed $with
+	 * @param float $width
 	 */
-	private function setWith( $width ): void {
+	private function setWith( $width ) {
 		if(is_numeric($width) && $width > 0)
 			$this->width = $width;
 	}
@@ -95,9 +97,9 @@ class Screen extends ConvertPoucesPixelsCm{
 	}
 
 	/**
-	 * @param mixed $lenght
+	 * @param $lenght
 	 */
-	private function setLenght( $lenght ): void {
+	private function setLenght( $lenght ){
 		if(is_numeric($lenght) && $lenght > 0)
 			$this->lenght = $lenght;
 	}
@@ -112,7 +114,7 @@ class Screen extends ConvertPoucesPixelsCm{
 	/**
 	 * @param mixed $dpi
 	 */
-	private function setDpi( int $dpi ): void {
+	private function setDpi( int $dpi ){
 		if(is_numeric($dpi) && $dpi > 0)
 			$this->dpi = $dpi;
 	}
@@ -127,14 +129,14 @@ class Screen extends ConvertPoucesPixelsCm{
 	/**
 	 * @param mixed $hypotenuse
 	 */
-	private function setHypotenuse( $hypotenuse ): void {
+	private function setHypotenuse( $hypotenuse ) {
 		if(is_numeric($hypotenuse) && $hypotenuse > 0)
 			$this->hypotenuse = $hypotenuse;
 	}
 	private function getUnite(){
 		return $this->unite;
 	}
-	private function setUnite( $unite ): void{
+	private function setUnite( $unite ){
 		$this->unite = $unite;
 	}
 }

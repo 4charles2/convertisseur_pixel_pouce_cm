@@ -4,6 +4,7 @@
 Plugin Name: Convertisseur Pixel Pouce Cm
 Plugin URI: http://
 Description: convertisseur pixels<=>pouces<=>cm entrer le short code [convertisseur] pour l'integrer
+			 Il y a deux type de formulaire un à partir de l'hypotenuse l'autre des longueur et largeur
 Version: 1.0
 Author: 4charles2
 Author URI: https://charles-tognol.fr
@@ -11,6 +12,7 @@ License: A "Slug" license name e.g. GPL2
 */
 
 include 'module/formConvertisseur.php';
+include 'Screen.php';
 
 
 /**
@@ -20,10 +22,12 @@ include 'module/formConvertisseur.php';
  *
  * @return string
  */
-function convertisseur_shortCode(){
+function convertisseur_shortCode($attr){
 	//Les fichiers sont insérer apres les elements visuel du DOM uniquement si un shortcode est présent sur la page
 	wp_enqueue_style('convertisseurStyle', plugin_dir_url(__FILE__).'css/convertisseurStyle.css');
 	wp_enqueue_script('convertisseurJs', plugin_dir_url(__FILE__).'js/convertisseurPoucesPixelsCm.js');
+	wp_enqueue_script('ajax', plugin_dir_url(__FILE__).'js/ajax.js');
+
 	$formAire = new formConvertisseur('aire');
 	$formHypotenuse = new formConvertisseur('hypotenuse');
 
@@ -45,19 +49,24 @@ function convertisseurStyle(){
 */
 
 function process_post(){
-	if(isset($_POST['hypotenuseForm']) && isset($_POST['hypotenuseForm-verif'])){
-		if(wp_verify_nonce($_POST['hypotenuseForm-verif'], 'convertie-hypotenuse')){
+	/*
+	if(isset($_POST['hypotenuseForm']) && isset($_POST['hypotenuseForm-verif'])
+	   && wp_verify_nonce($_POST['hypotenuseForm-verif'], 'convertie-hypotenuse')){
 			$screen = new Screen();
 			if($screen->hydrate($_POST))
-				//envoyer les données;
-				echo "coucou";
+				wp_safe_redirect(add_query_arg('OK', 'BienReçu', wp_get_referer()));
 			else
-				wp_safe_redirect(add_query_arg('erreur', 'badValue', wp_get_referer()));
-		}
-	}elseif (isset($_POST['aireForm']) && isset($_POST['aireForm-verif'])){
-		if(wp_verify_nonce($_POST['aireForm-verif'], 'convertie-aire')){
+				wp_safe_redirect(add_query_arg('erreur', 'Merci de vérifier que vous avez entré les bonnes valeurs', wp_get_referer()));
+
+	}else*/if (isset($_POST['aireForm']) && isset($_POST['aireForm-verif'])
+	    && wp_verify_nonce( $_POST['aireForm-verif'], 'convertie-aire' ) ) {
 			$screen = new Screen();
-			$screen->hydrate($_POST);
-		}
-	}
+			if ( $screen->hydrate( $_POST ) ) {
+				wp_safe_redirect( add_query_arg( 'OK', 'BienReçu', wp_get_referer() ) );
+			} else {
+				wp_safe_redirect( add_query_arg( 'erreur', 'Merci de vérifier que vous avez entré les bonnes valeurs', wp_get_referer() ) );
+			}
+	/*}else{
+		wp_safe_redirect(add_query_arg('erreur', 'Vous esseyez de manipuler le formulaire hors de son contexte initiale.', wp_get_referer()));
+	}*/
 }add_action('template_redirect', 'process_post');

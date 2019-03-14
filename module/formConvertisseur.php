@@ -88,10 +88,10 @@ class formConvertisseur{
             </div>";
 	}
 	function nonce($property){
-        $this->form .= wp_nonce_field($property->action, $property->name, true, false);
+        $this->form .= wp_nonce_field($property['action'], $property['name'], true, false);
     }
     function submitInput($name){
-	    $this->form .= "<input type='submit' value='valider' name='".$name."'/>";
+	    $this->form .= "<input type='submit' value='valider' name='".$name."' class='submitConvertisseur'/>";
     }
 
 	function show() {

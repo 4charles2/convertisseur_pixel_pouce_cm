@@ -23,7 +23,7 @@ class ConvertPoucesPixelsCm {
 	 *
 	 * @return float|int
 	 */
-	static function PIXELS_TO_CM($pixel, $dpi):float {
+	static function PIXELS_TO_CM($pixel, $dpi) {
 		return $pixel * self::$CM_POUCES/$dpi;
 	}
 
@@ -46,7 +46,7 @@ class ConvertPoucesPixelsCm {
 	 *
 	 * @return float
 	 */
-	static function CM_TO_PIXELS($cm, $dpi):float{
+	static function CM_TO_PIXELS($cm, $dpi){
 		return $cm * $dpi / self::$CM_POUCES;
 	}
 
@@ -68,7 +68,7 @@ class ConvertPoucesPixelsCm {
 	 *
 	 * @return float
 	 */
-	static function POUCES_TO_CM($pouces):float{
+	static function POUCES_TO_CM($pouces){
 		return $pouces * self::$CM_POUCES;
 	}
 
@@ -80,7 +80,7 @@ class ConvertPoucesPixelsCm {
 	 *
 	 * @return float
 	 */
-	static function POUCES_TO_PIXELS($pouces, $dpi):float{
+	static function POUCES_TO_PIXELS($pouces, $dpi){
 		return $pouces * $dpi;
 	}
 }
